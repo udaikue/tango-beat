@@ -15,6 +15,7 @@
             <tr>
                 <td>{{$tango->word}}</td>
                 <td>{{$tango->memo}}</td>
+                <td>{{$tango->done}}</td>
             </tr>
             @endforeach
         </table>

@@ -7,37 +7,80 @@ use Illuminate\Http\Request;
 
 class TangoController extends Controller
 {
-    public function index() {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         $tangos = Tango::all();
-        return view('index', ['tangos' => $tangos]);
+        return view('tango.index', ['tangos' => $tangos]);
     }
 
-    public function add(Request $request) {
-        return view('new');
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('tango.create');
     }
 
-    public function create(Request $request) {
-        // $this->validate($request, Tango::$rules);
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $tango = new Tango;
         $tango->word = $request->word;
         $tango->memo = $request->memo;
         $tango->done = false;
         $tango->save();
-        return redirect('/');
+        return redirect('/tango');
     }
 
-    public function edit(Request $request) {
-        $tango = Tango::find($request->id);
-        return view('edit', ['tango' => $tango]);
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        return redirect("/tango/{$id}/edit");
     }
 
-    public function update(Request $request) {
-        // $this->validate($request, Tango::$rules);
-        $tango = Tango::find($request->id);
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $tango = Tango::find($id);
+        return view('tango.edit', ['tango' => $tango]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $tango = Tango::find($id);
         $tango->word = $request->word;
         $tango->memo = $request->memo;
         $tango->done = false;
         $tango->save();
-        return redirect('/');
+        return redirect('/tango');
     }
 }

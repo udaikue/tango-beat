@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [TangoController::class, 'index']);
-Route::get('/new', [TangoController::class, 'add']);
-Route::post('/new', [TangoController::class, 'create']);
-Route::get('/edit/{id}', [TangoController::class, 'edit']);
-Route::post('/edit/{id}', [TangoController::class, 'update']);
+Route::resource('tango', TangoController::class)->except([
+    'destroy'
+]);
