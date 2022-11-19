@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="ja">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Tango Beat</title>
         <style>
             body {
@@ -11,6 +10,13 @@
         </style>
     </head>
     <body>
-        index
+        <table>
+            @foreach ($tangos as $tango)
+            <tr>
+                <td>{{$tango->word}}</td>
+                <td>{{$tango->memo}}</td>
+            </tr>
+            @endforeach
+        </table>
     </body>
 </html>
